@@ -1,0 +1,147 @@
+/* ═══════════════════════════════════════════════════════════════
+   JARVIS OS — CORE DESIGN SYSTEM
+   Design tokens, reset, base typography
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Color Palette ── */
+  --c-bg:           #020609;
+  --c-bg-1:         #060f1a;
+  --c-bg-2:         #091422;
+  --c-surface:      rgba(0, 229, 255, 0.03);
+  --c-surface-2:    rgba(0, 229, 255, 0.06);
+  --c-border:       rgba(0, 229, 255, 0.09);
+  --c-border-mid:   rgba(0, 229, 255, 0.18);
+  --c-border-bright:rgba(0, 229, 255, 0.35);
+
+  --c-primary:      #00e5ff;
+  --c-primary-dim:  #0099cc;
+  --c-primary-dark: #004466;
+  --c-primary-glow: rgba(0, 229, 255, 0.4);
+
+  --c-text:         #c8e8f2;
+  --c-text-dim:     rgba(0, 180, 220, 0.45);
+  --c-text-muted:   rgba(0, 100, 150, 0.5);
+
+  --c-orange:       #ff8c00;
+  --c-orange-glow:  rgba(255, 140, 0, 0.4);
+  --c-purple:       #9b59b6;
+  --c-purple-dim:   rgba(155, 89, 182, 0.6);
+  --c-green:        #00ff88;
+  --c-green-glow:   rgba(0, 255, 136, 0.35);
+  --c-red:          #ff4444;
+  --c-red-glow:     rgba(255, 68, 68, 0.35);
+  --c-amber:        #ffaa00;
+  --c-amber-glow:   rgba(255, 170, 0, 0.35);
+
+  /* ── Spacing Scale ── */
+  --sp-xs:  4px;
+  --sp-sm:  8px;
+  --sp-md:  16px;
+  --sp-lg:  24px;
+  --sp-xl:  40px;
+  --sp-2xl: 64px;
+
+  /* ── Glow System ── */
+  --glow-soft:   0 0 12px rgba(0, 229, 255, 0.12);
+  --glow-medium: 0 0 24px rgba(0, 229, 255, 0.25);
+  --glow-strong: 0 0 48px rgba(0, 229, 255, 0.45);
+  --glow-text:   0 0 10px rgba(0, 229, 255, 0.5);
+
+  /* ── Border Radius ── */
+  --r-xs: 1px;
+  --r-sm: 2px;
+  --r-md: 4px;
+  --r-lg: 8px;
+
+  /* ── Typography ── */
+  --font-display: 'Orbitron', 'Share Tech Mono', monospace;
+  --font-mono:    'Share Tech Mono', monospace;
+
+  /* ── Transitions ── */
+  --t-fast: 0.12s ease;
+  --t-base: 0.22s ease;
+  --t-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Legacy compatibility aliases ── */
+  --cyan:       var(--c-primary);
+  --cyan-dim:   var(--c-primary-dim);
+  --cyan-dark:  var(--c-primary-dark);
+  --cyan-glow:  var(--c-primary-glow);
+  --orange:     var(--c-orange);
+  --purple:     var(--c-purple);
+  --bg:         var(--c-bg);
+  --bg2:        var(--c-bg-1);
+  --text:       var(--c-text);
+  --mono:       var(--font-mono);
+  --display:    var(--font-display);
+  --glass-bg:   transparent;
+  --glass-border: var(--c-border-mid);
+
+  /* ── Orb colors ── */
+  --orb-primary: #00e5ff;
+  --orb-accent:  #80f2ff;
+  --orb-core1:   transparent;
+  --orb-core2:   rgba(0, 229, 255, 0.1);
+  --orb-core3:   rgba(0, 153, 204, 0.2);
+  --orb-core4:   rgba(0, 51, 102, 0.5);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-mono);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  cursor: crosshair;
+  text-transform: uppercase;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 255, 0.4); }
+* { scrollbar-width: thin; scrollbar-color: rgba(0, 229, 255, 0.2) transparent; }
+
+/* ── Typography classes ── */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--c-primary);
+  text-shadow: var(--glow-text);
+}
+
+.t-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--c-text-dim);
+}
+
+.t-data {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--c-primary);
+}
+
+/* ── Utility ── */
+.hidden { display: none !important; }
+.invisible { visibility: hidden; }

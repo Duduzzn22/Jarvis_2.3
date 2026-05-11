@@ -1,0 +1,134 @@
+/* ═══════════════════════════════════════════════════════════════
+   JARVIS OS — RESPONSIVE SYSTEM
+   Adaptive layout for different screen sizes
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Ultrawide (2560px+) ── */
+@media (min-width: 2560px) {
+  #content-area {
+    grid-template-columns: 220px 1fr 480px;
+  }
+
+  #rings-container { width: 480px; height: 480px; }
+  #hud-orb-canvas  { width: 480px; height: 480px; }
+
+  #chat-messages { padding: 24px 22px; gap: 20px; }
+  .msg-text { font-size: 13px; }
+
+  #sb-brand-logo { font-size: 24px; }
+  .floating-btn  { font-size: 11px; padding: 13px 20px; }
+}
+
+/* ── Large monitors (1920px+) ── */
+@media (min-width: 1920px) and (max-width: 2559px) {
+  #content-area {
+    grid-template-columns: 210px 1fr 460px;
+  }
+}
+
+/* ── Standard laptops (1440px - 1919px) ── */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  /* Default sizes work well */
+}
+
+/* ── Small laptops / tablets (1280px - 1439px) ── */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  #content-area {
+    grid-template-columns: 186px 1fr 380px;
+  }
+
+  #rings-container { width: 340px; height: 340px; }
+  #hud-orb-canvas  { width: 340px; height: 340px; }
+
+  #assistant-name-display { font-size: 12px; letter-spacing: 6px; }
+}
+
+/* ── Compact screens (1024px - 1279px) ── */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #content-area {
+    grid-template-columns: 56px 1fr 340px;
+  }
+
+  /* Collapse sidebar to icon-only */
+  #sb-brand-sub,
+  #sb-brand-ver,
+  .sb-group-label,
+  .floating-btn .sb-label,
+  .floating-btn .sb-badge,
+  #sb-status .sb-status-row span:last-child {
+    display: none;
+  }
+
+  #sb-brand { padding: 16px 10px; }
+  #sb-brand-logo { font-size: 14px; letter-spacing: 3px; }
+
+  .floating-btn {
+    padding: 14px;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .floating-btn .sb-icon { width: 18px; height: 18px; opacity: 0.7; }
+
+  #sb-status { padding: 10px 8px; align-items: center; }
+  .sb-status-row { justify-content: center; }
+
+  #rings-container { width: 300px; height: 300px; }
+  #hud-orb-canvas  { width: 300px; height: 300px; }
+
+  #waveform-canvas { width: 240px; }
+
+  #assistant-name-display { font-size: 11px; letter-spacing: 5px; }
+
+  #chat-messages { padding: 14px 14px; gap: 12px; }
+  .msg-text { font-size: 11.5px; }
+}
+
+/* ── Mobile / very small (below 1024px) ── */
+@media (max-width: 1023px) {
+  #content-area {
+    grid-template-columns: 0px 1fr 0px;
+  }
+
+  #left-sidebar {
+    display: none;
+  }
+
+  /* Chat takes full width, orb panel shrinks */
+  #core-panel {
+    display: none;
+  }
+
+  /* Chat panel fills entire content area */
+  #content-area {
+    grid-template-columns: 1fr;
+  }
+
+  #chat-panel {
+    border-left: none;
+  }
+
+  #status-bar {
+    padding: 0 var(--sp-md);
+  }
+
+  #hud-username-wrap { display: none; }
+}
+
+/* ── Height-constrained screens ── */
+@media (max-height: 700px) {
+  #rings-container { width: 280px; height: 280px; }
+  #hud-orb-canvas  { width: 280px; height: 280px; }
+
+  #waveform-canvas { display: none !important; }
+
+  #core-panel { gap: var(--sp-sm); }
+
+  #status-bar { height: 38px; }
+}
+
+@media (max-height: 600px) {
+  #core-panel { justify-content: flex-start; padding-top: var(--sp-sm); }
+  #rings-container { width: 220px; height: 220px; }
+  #hud-orb-canvas  { width: 220px; height: 220px; }
+}

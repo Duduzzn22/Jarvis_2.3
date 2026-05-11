@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local configuration and credentials
+.env
+_env
+.env.*
+!.env.example
+.spotify_cache
+google_credentials.json
+google_token.json
+
+# Local runtime data
+*.db
+*.sqlite
+*.sqlite3
+*.log
+tasks.json
+jarvis_backup_*.json
+jarvis_import_*.json
+
+# Generated media and temporary files
+*.mp3
+*.wav
+*.tmp
+*.bak
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Project-local generated artifacts
+static/**/*.map

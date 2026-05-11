@@ -1,0 +1,291 @@
+/* ═══════════════════════════════════════════════════════════════
+   JARVIS OS — COMMAND DOCK (Left Sidebar)
+   Holographic navigation dock
+   ═══════════════════════════════════════════════════════════════ */
+
+#left-sidebar {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  background: linear-gradient(180deg,
+    rgba(3, 11, 24, 0.98) 0%,
+    rgba(2, 8, 18, 0.99) 100%
+  );
+
+  /* Right edge accent line */
+  border-right: 1px solid transparent;
+  border-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0,229,255,0.2) 20%,
+    rgba(0,229,255,0.35) 50%,
+    rgba(0,229,255,0.2) 80%,
+    transparent 100%
+  ) 1;
+}
+
+/* Slow scan line descending */
+#left-sidebar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg,
+    transparent,
+    rgba(0, 229, 255, 0.03),
+    transparent
+  );
+  animation: sbScan 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Brand Section ── */
+#sb-brand {
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--c-border);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+#sb-brand-logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--c-primary);
+  letter-spacing: 7px;
+  text-shadow: 0 0 20px var(--c-primary-glow), 0 0 40px rgba(0,229,255,0.1);
+  line-height: 1;
+  animation: corePulse 4s ease-in-out infinite;
+}
+
+#sb-brand-sub {
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  letter-spacing: 2.5px;
+  color: rgba(0, 229, 255, 0.28);
+  margin-top: 6px;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+#sb-brand-ver {
+  font-family: var(--font-mono);
+  font-size: 6px;
+  letter-spacing: 2px;
+  color: rgba(0, 229, 255, 0.16);
+  margin-top: 4px;
+}
+
+/* ── Navigation ── */
+#sb-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-sm) 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  position: relative;
+  z-index: 1;
+}
+
+#sb-nav::-webkit-scrollbar { display: none; }
+
+.sb-group-label {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 3px;
+  color: rgba(0, 229, 255, 0.18);
+  text-transform: uppercase;
+  padding: 14px 18px 5px;
+  position: relative;
+}
+
+.sb-group-label::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--c-border), transparent);
+}
+
+/* ── Sidebar Button ── */
+.floating-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 18px;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  color: rgba(0, 160, 200, 0.35);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--t-base);
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+/* Icon */
+.floating-btn .sb-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.45;
+  transition: opacity var(--t-base), filter var(--t-base);
+}
+
+/* Label */
+.floating-btn .sb-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color var(--t-base);
+}
+
+/* Badge dot */
+.floating-btn .sb-badge {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  opacity: 0;
+  box-shadow: 0 0 6px var(--c-primary);
+  transition: opacity var(--t-base);
+  flex-shrink: 0;
+}
+
+/* Hover */
+.floating-btn:hover {
+  color: var(--c-primary);
+  border-left-color: rgba(0,229,255,0.4);
+  background: linear-gradient(90deg,
+    rgba(0, 229, 255, 0.06) 0%,
+    rgba(0, 229, 255, 0.01) 100%
+  );
+}
+
+.floating-btn:hover .sb-icon {
+  opacity: 0.9;
+  filter: drop-shadow(0 0 4px var(--c-primary));
+}
+
+.floating-btn:hover .sb-badge {
+  opacity: 0.45;
+}
+
+/* Active state */
+.floating-btn.active {
+  color: var(--c-primary);
+  border-left-color: var(--c-primary);
+  background: linear-gradient(90deg,
+    rgba(0, 229, 255, 0.1) 0%,
+    rgba(0, 229, 255, 0.02) 80%,
+    transparent 100%
+  );
+  text-shadow: 0 0 8px rgba(0,229,255,0.3);
+}
+
+.floating-btn.active .sb-icon {
+  opacity: 1;
+  filter: drop-shadow(0 0 5px var(--c-primary));
+}
+
+.floating-btn.active .sb-badge {
+  opacity: 1;
+}
+
+/* Right accent on active */
+.floating-btn.active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 25%;
+  bottom: 25%;
+  width: 1px;
+  background: rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 8px var(--c-primary);
+}
+
+/* Wake word active button text change */
+#wake-btn.active .sb-label::before {
+  content: '◉ ';
+  color: var(--c-green);
+}
+
+/* Thinking active tint */
+#thinking-btn.active {
+  border-left-color: var(--c-purple);
+  color: #cc88ff;
+}
+
+/* ── Status Section ── */
+#sb-status {
+  padding: 12px 18px;
+  border-top: 1px solid var(--c-border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  z-index: 1;
+}
+
+.sb-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 7.5px;
+  letter-spacing: 1.5px;
+  color: rgba(0, 160, 200, 0.35);
+  text-transform: uppercase;
+}
+
+.sb-status-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.15);
+  flex-shrink: 0;
+  transition: all var(--t-base);
+}
+
+.sb-status-dot.on   { background: var(--c-green); box-shadow: 0 0 5px var(--c-green-glow); }
+.sb-status-dot.warn { background: var(--c-amber);  box-shadow: 0 0 5px var(--c-amber-glow); }
+.sb-status-dot.off  { background: rgba(255, 68, 68, 0.45); }
+
+/* ── Position override: sidebar buttons not fixed ── */
+#wake-btn, #temporal-btn, #personality-btn,
+#thinking-btn, #memory-btn, #nexus-btn {
+  position: static !important;
+  width: 100% !important;
+  top: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  border-radius: 0 !important;
+  border-left: 2px solid transparent !important;
+  padding: 12px 18px !important;
+  background: transparent !important;
+}
+
+#wake-btn.active,
+#temporal-btn.active,
+#personality-btn.active,
+#thinking-btn.active,
+#memory-btn.active,
+#nexus-btn.active {
+  border-left-color: var(--c-primary) !important;
+}

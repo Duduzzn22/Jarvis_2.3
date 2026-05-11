@@ -1,0 +1,242 @@
+/* ═══════════════════════════════════════════════════════════════
+   JARVIS OS — LAYOUT SYSTEM
+   Main grid, status bar, content areas
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Main Interface ── */
+#main-interface {
+  display: none;
+  position: fixed;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  flex-direction: column;
+}
+
+#main-interface.visible {
+  display: flex;
+  opacity: 1;
+}
+
+/* ── Status Bar ── */
+#status-bar {
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sp-lg);
+  background: linear-gradient(180deg, rgba(0,8,20,0.95) 0%, transparent 100%);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.status-section {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--c-text-dim);
+}
+
+#clock {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--c-primary);
+  text-shadow: var(--glow-text);
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+#system-status {
+  color: var(--c-text-dim);
+  font-size: 9px;
+  letter-spacing: 2px;
+  transition: color var(--t-base);
+}
+
+#system-status.processing {
+  color: var(--c-orange);
+  text-shadow: 0 0 8px var(--c-orange-glow);
+}
+
+#system-status.executing {
+  color: var(--c-purple);
+  text-shadow: 0 0 8px rgba(155,89,182,0.5);
+}
+
+/* HUD Username top-left */
+#hud-username-wrap {
+  position: fixed;
+  top: 12px;
+  left: var(--sp-md);
+  z-index: 100;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--c-text-dim);
+  text-shadow: var(--glow-text);
+  pointer-events: none;
+}
+
+/* ── API Indicators ── */
+.api-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--c-text-muted);
+}
+
+.api-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--c-border);
+  transition: all var(--t-base);
+}
+
+.api-dot.active {
+  background: var(--c-primary);
+  box-shadow: 0 0 6px var(--c-primary);
+}
+
+.api-dot.error {
+  background: var(--c-red);
+  box-shadow: 0 0 6px var(--c-red-glow);
+}
+
+/* ── Content Area ── */
+#content-area {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 200px 1fr 420px;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+  min-height: 0;
+}
+
+/* ── Core Panel (center) ── */
+#core-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: var(--sp-lg);
+  gap: var(--sp-lg);
+  background: radial-gradient(ellipse at center 40%, rgba(0,50,90,0.15) 0%, transparent 65%);
+}
+
+/* Ambient glow behind orb */
+#core-panel::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,150,200,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Orb container */
+#rings-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+#hud-orb-canvas {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Neural BG canvas — disabled in Stark theme */
+#neural-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  transition: opacity 0.7s ease;
+  display: none !important;
+}
+
+/* Assistant name + status below orb */
+#assistant-name-block {
+  text-align: center;
+  position: relative;
+  z-index: 3;
+  margin-top: -8px;
+}
+
+#assistant-name-display {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-primary);
+  letter-spacing: 8px;
+  text-shadow: 0 0 20px var(--c-primary-glow), 0 0 40px rgba(0,229,255,0.15);
+  animation: corePulse 4s ease-in-out infinite;
+}
+
+#assistant-status-display {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 5px;
+  color: var(--c-text-dim);
+  margin-top: 6px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  transition: color var(--t-slow);
+}
+
+/* Waveform canvas */
+#waveform-canvas {
+  position: relative;
+  z-index: 2;
+  width: 300px;
+  height: 70px;
+}
+
+/* Hidden canvas elements */
+#particle-canvas,
+#hex-canvas {
+  display: none;
+}
+
+/* Decorative corner elements */
+.corner-deco {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  z-index: 8;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.corner-deco svg { fill: none; stroke: var(--c-primary); stroke-width: 0.8; }
+.corner-deco.bl { bottom: 90px; left: 12px; }
+.corner-deco.br { bottom: 90px; right: 12px; transform: scaleX(-1); }
+
+/* ── Hidden elements ── */
+#tts-audio   { display: none; }
+#mode-chip   { display: none; }

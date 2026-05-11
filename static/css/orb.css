@@ -1,0 +1,122 @@
+/* ═══════════════════════════════════════════════════════════════
+   JARVIS OS — ORB SYSTEM
+   Central reactive core visual system
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Core Panel state-based ambient colors ── */
+#core-panel.nn-speaking  #neural-bg-canvas { opacity: 0.65; }
+#core-panel.nn-thinking  #neural-bg-canvas { opacity: 0.45; }
+#core-panel.nn-idle      #neural-bg-canvas { opacity: 0.22; }
+
+/* ── Orb Container ── */
+#rings-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+/* Ambient pulse ring behind orb (CSS-driven) */
+#rings-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(0, 150, 210, 0.06) 0%,
+    transparent 70%
+  );
+  animation: orbAmbient 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Speaking state — stronger ambient */
+#rings-container.speaking::before {
+  background: radial-gradient(circle,
+    rgba(0, 200, 255, 0.1) 0%,
+    transparent 65%
+  );
+  animation: orbAmbientSpeaking 0.5s ease-in-out infinite alternate;
+}
+
+/* Thinking state — purple tint */
+#rings-container.thinking::before {
+  background: radial-gradient(circle,
+    rgba(155, 89, 182, 0.08) 0%,
+    transparent 65%
+  );
+  animation: orbAmbientThinking 1.5s ease-in-out infinite alternate;
+}
+
+/* ── Canvas element ── */
+#hud-orb-canvas {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ── Name block ── */
+#assistant-name-block {
+  text-align: center;
+  position: relative;
+  z-index: 3;
+  margin-top: -4px;
+}
+
+/* State-based status text color */
+#assistant-status-display {
+  transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+#rings-container.speaking ~ #assistant-name-block #assistant-status-display {
+  color: var(--c-primary);
+  text-shadow: 0 0 8px var(--c-primary-glow);
+}
+
+#rings-container.thinking ~ #assistant-name-block #assistant-status-display {
+  color: #cc88ff;
+  text-shadow: 0 0 8px rgba(155,89,182,0.5);
+}
+
+/* ── Waveform Canvas ── */
+#waveform-canvas {
+  position: relative;
+  z-index: 2;
+  width: 300px;
+  height: 70px;
+  opacity: 0.85;
+}
+
+/* ── Orb Ambient Keyframes ── */
+@keyframes orbAmbient {
+  0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+  50%     { opacity: 1;   transform: translate(-50%,-50%) scale(1.08); }
+}
+
+@keyframes orbAmbientSpeaking {
+  from { opacity: 0.7; transform: translate(-50%,-50%) scale(1); }
+  to   { opacity: 1;   transform: translate(-50%,-50%) scale(1.12); }
+}
+
+@keyframes orbAmbientThinking {
+  from { opacity: 0.5; transform: translate(-50%,-50%) scale(1); }
+  to   { opacity: 0.9; transform: translate(-50%,-50%) scale(1.06); }
+}
+
+/* ── HUD Personality Indicator (legacy, hidden in sidebar version) ── */
+#hud-personality {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  transition: color 0.4s;
+  text-transform: uppercase;
+}

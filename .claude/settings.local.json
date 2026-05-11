@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/Scripts/pip list *)",
+      "Bash(.venv/Scripts/python -c \"import fish_speech; print\\(dir\\(fish_speech\\)\\)\")",
+      "Bash(.venv/Scripts/pip install *)",
+      "Bash(.venv/Scripts/python --version)",
+      "Bash(.venv/Scripts/python -c \"from f5_tts.api import F5TTS; import inspect; print\\(inspect.signature\\(F5TTS.infer\\)\\)\")"
+    ]
+  }
+}
